@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>A Little Something for You — Happy Birthday</title>
+  <meta name="description" content="A personal birthday greeting card made especially for you.">
+  <meta name="theme-color" content="#3B2922">
+
+  <!-- Google Fonts: Cormorant Garamond (400, 400i, 500, 500i, 600), DM Sans (400, 500, 600), Caveat (400) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Inline SVG Botanical Definitions (Mirrored in assets/leaves.svg for local/offline reliability) -->
+  <svg xmlns="http://www.w3.org/2000/svg" style="display: none;" aria-hidden="true" focusable="false">
+    <!-- 1. Cover Maple Leaf -->
+    <symbol id="art-maple-leaf" viewBox="0 0 120 120">
+      <path d="M60 14 C63 28 69 34 75 30 C73 41 77 45 92 40 C85 51 87 56 99 58 C84 64 81 69 87 77 C73 75 68 79 67 90 C63 82 61 80 60 80 C59 80 57 82 53 90 C52 79 47 75 33 77 C39 69 36 64 21 58 C33 56 35 51 28 40 C43 45 47 41 45 30 C51 34 57 28 60 14 Z"
+            fill="#B94E2C" stroke="#754B35" stroke-width="1.4" stroke-linejoin="round"/>
+      <path d="M60 22 L60 106" stroke="#754B35" stroke-width="1.6" stroke-linecap="round"/>
+      <path d="M60 48 L79 44 M60 58 L84 57 M60 68 L74 71 M60 48 L41 44 M60 58 L36 57 M60 68 L46 71 M60 37 L69 33 M60 37 L51 33"
+            stroke="#D6A849" stroke-width="1.1" stroke-linecap="round" opacity="0.9"/>
+    </symbol>
+
+    <!-- 2. Inside Greeting Leaf Cluster -->
+    <symbol id="art-leaf-cluster" viewBox="0 0 160 64">
+      <path d="M18 46 Q80 26 142 44" fill="none" stroke="#754B35" stroke-width="1.3" stroke-linecap="round"/>
+      <!-- Left Leaf -->
+      <path d="M56 36 C44 21 27 22 24 32 C31 41 46 42 56 36 Z" fill="#B94E2C" stroke="#754B35" stroke-width="1.1"/>
+      <path d="M54 36 L31 32" stroke="#D6A849" stroke-width="0.9" stroke-linecap="round"/>
+      <!-- Center Gold Accent Leaf -->
+      <path d="M80 33 C75 16 85 10 92 18 C95 26 87 32 80 33 Z" fill="#D6A849" stroke="#754B35" stroke-width="1.1"/>
+      <path d="M81 32 L88 18" stroke="#754B35" stroke-width="0.8" stroke-linecap="round"/>
+      <!-- Right Leaf -->
+      <path d="M102 35 C114 22 131 23 134 33 C126 42 111 41 102 35 Z" fill="#B94E2C" stroke="#754B35" stroke-width="1.1"/>
+      <path d="M104 35 L126 32" stroke="#D6A849" stroke-width="0.9" stroke-linecap="round"/>
+      <!-- Small Berry/Bud Details -->
+      <circle cx="67" cy="28" r="2.3" fill="#702F32"/>
+      <circle cx="96" cy="41" r="2.1" fill="#702F32"/>
+    </symbol>
+
+    <!-- 3. Photo Spread Fine Botanical Branch -->
+    <symbol id="art-botanical-branch" viewBox="0 0 180 56">
+      <path d="M16 38 C62 24 114 24 164 36" fill="none" stroke="#754B35" stroke-width="1.2" stroke-linecap="round"/>
+      <path d="M48 31 C40 20 28 21 26 28 C32 34 42 34 48 31 Z" fill="#B94E2C" opacity="0.9"/>
+      <path d="M78 27 C72 15 61 15 58 22 C63 29 72 29 78 27 Z" fill="#D6A849" opacity="0.88"/>
+      <path d="M104 27 C110 15 121 15 124 22 C119 29 110 29 104 27 Z" fill="#B94E2C" opacity="0.9"/>
+      <path d="M134 31 C142 20 154 21 156 28 C150 34 140 34 134 31 Z" fill="#754B35" opacity="0.8"/>
+      <path d="M64 29 C58 38 48 41 43 37 C47 31 56 29 64 29 Z" fill="#754B35" opacity="0.75"/>
+      <path d="M116 29 C122 38 132 41 137 37 C133 31 124 29 116 29 Z" fill="#D6A849" opacity="0.85"/>
+    </symbol>
+
+    <!-- 4. Tiny Leaf Ornament for Final Message & Letter Corner -->
+    <symbol id="art-tiny-leaf" viewBox="0 0 48 48">
+      <path d="M12 36 C16 20 28 12 38 12 C36 24 28 34 12 36 Z" fill="#B94E2C" stroke="#754B35" stroke-width="1.2"/>
+      <path d="M10 38 C18 30 26 22 34 15" fill="none" stroke="#D6A849" stroke-width="1.1" stroke-linecap="round"/>
+    </symbol>
+
+    <!-- Single Drifting Autumn Leaf -->
+    <symbol id="art-drifting-leaf" viewBox="0 0 36 36">
+      <path d="M7 28 C10 15 20 8 30 8 C28 19 21 27 7 28 Z" fill="#B94E2C" stroke="#754B35" stroke-width="1"/>
+      <path d="M6 29 L25 12" stroke="#D6A849" stroke-width="0.9" stroke-linecap="round"/>
+    </symbol>
+  </svg>
+
+  <main class="experience-stage" id="main-content">
+
+    <!-- ==========================================
+         SCENES 1 & 2: THE PHYSICAL GREETING CARD
+         ========================================== -->
+    <section class="card-scene" aria-label="Birthday Greeting Card">
+      <div class="card-viewport">
+        <div class="greeting-card" id="greeting-card" data-state="closed">
+
+          <!-- INSIDE RIGHT PANEL (Revealed when the cover opens) -->
+          <div class="card-interior" id="card-interior" aria-hidden="true">
+            <div class="card-paper-frame">
+
+              <!-- Restrained Falling Leaves (3-4 leaves, run once during opening only) -->
+              <div class="falling-leaves-layer" id="falling-leaves" aria-hidden="true">
+                <svg class="drift-leaf drift-leaf--1"><use href="#art-drifting-leaf"></use></svg>
+                <svg class="drift-leaf drift-leaf--2"><use href="#art-drifting-leaf"></use></svg>
+                <svg class="drift-leaf drift-leaf--3"><use href="#art-drifting-leaf"></use></svg>
+                <svg class="drift-leaf drift-leaf--4"><use href="#art-drifting-leaf"></use></svg>
+              </div>
+
+              <div class="interior-content" id="interior-greeting">
+                <svg class="interior-cluster-svg" aria-hidden="true">
+                  <use href="#art-leaf-cluster"></use>
+                </svg>
+
+                <p class="interior-lead">Today is all about you.</p>
+                <h1 class="interior-title">Happy Birthday!</h1>
+                <p class="interior-subtitle">To a truly wonderful mom.</p>
+
+                <div class="interior-divider" aria-hidden="true"></div>
+
+                <p class="scroll-cue" id="scroll-cue">
+                  <span>Scroll gently to read your card</span>
+                  <svg class="scroll-cue-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <path d="M12 5V19M12 19L6 13M12 19L18 13" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </p>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- HINGED FRONT COVER (Rotates around the left vertical spine) -->
+          <div class="card-cover-hinge" id="card-cover-hinge">
+
+            <!-- Front Face of the Cover (Scene 1) -->
+            <button
+              type="button"
+              class="card-cover-front"
+              id="open-card-button"
+              aria-label="Open your birthday card: A little something, just for you."
+              aria-expanded="false"
+              aria-controls="card-interior KeepsakeContent"
+            >
+              <span class="cover-paper-frame">
+                <span class="cover-inner-border">
+                  <span class="cover-heading-group">
+                    <span class="cover-line">A little something,</span>
+                    <span class="cover-line cover-line--italic">just for you.</span>
+                  </span>
+
+                  <span class="cover-illustration-wrap" aria-hidden="true">
+                    <svg class="cover-maple-svg">
+                      <use href="#art-maple-leaf"></use>
+                    </svg>
+                  </span>
+
+                  <span class="cover-prompt">
+                    <span class="cover-prompt-text">Open your birthday card</span>
+                    <svg class="cover-prompt-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                      <path d="M5 12H19M19 12L13 6M19 12L13 18" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                  </span>
+                </span>
+              </span>
+            </button>
+
+            <!-- Inside Face of the Left Cover (Visible as the cover swings open) -->
+            <div class="card-cover-back" aria-hidden="true">
+              <div class="cover-back-paper-frame">
+                <svg class="cover-back-ornament">
+                  <use href="#art-tiny-leaf"></use>
+                </svg>
+              </div>
+            </div>
+
+          </div><!-- /.card-cover-hinge -->
+
+        </div><!-- /.greeting-card -->
+      </div><!-- /.card-viewport -->
+    </section>
+
+    <!-- ==========================================
+         SCENES 3, 4, 5 & 6: UNFOLDED KEEPSAKE SPREAD
+         ========================================== -->
+    <div class="keepsake-flow" id="KeepsakeContent" aria-hidden="true">
+
+      <!-- SCENE 3: THE FAMILY PHOTOGRAPHS -->
+      <section class="paper-spread photo-spread" id="scene-photos" aria-labelledby="photos-caption">
+        <div class="spread-paper-sheet">
+          <div class="botanical-header" aria-hidden="true">
+            <svg class="branch-svg">
+              <use href="#art-botanical-branch"></use>
+            </svg>
+          </div>
+
+          <div class="photo-album-composition">
+            <!-- Photograph 1 (914 x 1706 — Primary visual prominence) -->
+            <figure class="photo-frame photo-frame--primary" id="photo-frame-one">
+              <div class="photo-print-border">
+                <div class="photo-inner-mat" style="--photo-aspect: 914 / 1706;">
+                  <img
+                    src="assets/photo-one.jpg"
+                    alt="Mother and daughter smiling together in the car wearing a festive Christmas doggy filter."
+                    width="914"
+                    height="1706"
+                    loading="eager"
+                    decoding="async"
+                    class="family-photo"
+                  >
+                  <div class="photo-missing-fallback" aria-hidden="true">
+                    <span>Photograph One</span>
+                    <small>assets/photo-one.jpg</small>
+                  </div>
+                </div>
+              </div>
+            </figure>
+
+            <!-- Photograph 2 (750 x 1334 — Offset secondary balance) -->
+            <figure class="photo-frame photo-frame--secondary" id="photo-frame-two">
+              <div class="photo-print-border">
+                <div class="photo-inner-mat" style="--photo-aspect: 750 / 1334;">
+                  <img
+                    src="assets/photo-two.jpg"
+                    alt="Mother and daughter together in the car wearing a playful classic doggy filter."
+                    width="750"
+                    height="1334"
+                    loading="lazy"
+                    decoding="async"
+                    class="family-photo"
+                  >
+                  <div class="photo-missing-fallback" aria-hidden="true">
+                    <span>Photograph Two</span>
+                    <small>assets/photo-two.jpg</small>
+                  </div>
+                </div>
+              </div>
+            </figure>
+          </div>
+
+          <p class="album-caption" id="photos-caption">Some moments deserve to be kept close.</p>
+        </div>
+      </section>
+
+      <!-- SCENE 4: THE DAUGHTER'S LETTER -->
+      <section class="paper-spread letter-section" id="scene-daughter-letter" aria-labelledby="daughter-letter-heading">
+        <article class="stationery-sheet stationery-sheet--daughter">
+          <svg class="stationery-corner-leaf" aria-hidden="true">
+            <use href="#art-tiny-leaf"></use>
+          </svg>
+
+          <header class="letter-header">
+            <p class="letter-kicker">A note for you</p>
+            <h2 class="letter-heading" id="daughter-letter-heading">From your daughter, with love.</h2>
+          </header>
+
+          <div class="letter-body">
+            <p>Happy birthday to the best mommy ever! We love you so much. The way you love and care for us, the way you still guide us even as adults, and the way you love us unconditionally mean so much to us.</p>
+            <p>God has truly blessed us with a one-of-a-kind mom. Thank you for everything. Thank you for always being there for us, for the love, for the support, and for simply being our mom.</p>
+            <p>We love you so much. Happy birthday! 😄❤️</p>
+          </div>
+        </article>
+      </section>
+
+      <!-- SCENE 5: THE BOYFRIEND'S PERSONAL LETTER -->
+      <section class="paper-spread letter-section" id="scene-boyfriend-letter" aria-labelledby="boyfriend-letter-heading">
+        <article class="stationery-sheet stationery-sheet--boyfriend">
+          <div class="stationery-accent-edge" aria-hidden="true"></div>
+
+          <header class="letter-header">
+            <p class="letter-kicker">Personal note</p>
+            <h2 class="letter-heading" id="boyfriend-letter-heading">A little note from me to you.</h2>
+          </header>
+
+          <div class="letter-body">
+            <p>Happy Birthday!</p>
+            <p>I want you to know how much I appreciate you, not just today, but all the time. I know I’ve told you before how much it means to me that you’ve welcomed me into your family, but I don’t think I’ll ever stop being grateful for it. The way you’ve made me feel loved, accepted, and included means more to me than I can fully put into words.</p>
+            <p>You’re such a wonderful person, and I’m genuinely thankful to have you in my life. Thank you for being so kind to me and for making me feel like I’m one of your own. That’s something I will never take for granted.</p>
+            <p>And thank you for raising such a beautiful woman. I’m so lucky to have your daughter in my life, and I know that the love, strength, and goodness she carries are a reflection of the woman who raised her.</p>
+            <p>I hope this birthday brings you the same love and happiness that you give to the people around you. You deserve to feel celebrated, appreciated, and loved today and every day.</p>
+            <p>Happy Birthday! I’m truly grateful for you. ❤️</p>
+          </div>
+
+          <footer class="letter-signoff">
+            <p class="signoff-closing">With love and gratitude,</p>
+            <p class="signoff-signature">Love, Rod</p>
+          </footer>
+        </article>
+      </section>
+
+      <!-- SCENE 6: FINAL BIRTHDAY WISH -->
+      <section class="paper-spread closing-section" id="scene-closing" aria-labelledby="closing-heading">
+        <div class="closing-card">
+          <svg class="closing-leaf-svg" aria-hidden="true">
+            <use href="#art-tiny-leaf"></use>
+          </svg>
+
+          <p class="closing-lead">Today, we celebrate you.</p>
+          <h2 class="closing-title" id="closing-heading">Happy Birthday.</h2>
+          <div class="closing-burgundy-line" aria-hidden="true"></div>
+          <p class="closing-wish">You deserve all the love you give to others.</p>
+        </div>
+      </section>
+
+    </div><!-- /.keepsake-flow -->
+
+  </main>
+
+  <!-- GSAP Core (with graceful static/CSS fallback if offline or blocked) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+  <script src="script.js" defer></script>
+</body>
+</html>

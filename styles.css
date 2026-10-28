@@ -1,0 +1,813 @@
+/* ==========================================================================
+   A LITTLE SOMETHING FOR YOU — MASTER STYLESHEET
+   Color System, Typography, 3D Card Geometry & Editorial Stationery
+   ========================================================================== */
+
+:root {
+  /* Primary Palette */
+  --color-paper-ivory: #F4E8D2;
+  --color-burnt-orange: #B94E2C;
+  --color-mulberry-burgundy: #702F32;
+  --color-autumn-gold: #D6A849;
+  --color-walnut-brown: #754B35;
+
+  /* Supporting Colors */
+  --color-deep-walnut: #3B2922;
+  --color-dark-ink: #382B27;
+  --color-muted-ink: #755F52;
+  --color-paper-edge: #E3D3B8;
+
+  /* Shadows (#241610 at 12% to 24% opacity) */
+  --shadow-card-outer:
+    0 14px 32px rgba(36, 22, 16, 0.24),
+    0 3px 8px rgba(36, 22, 16, 0.16);
+  --shadow-cover-open:
+    -10px 16px 28px rgba(36, 22, 16, 0.22),
+    -2px 4px 10px rgba(36, 22, 16, 0.14);
+  --shadow-paper-sheet:
+    0 10px 24px rgba(36, 22, 16, 0.18),
+    0 2px 6px rgba(36, 22, 16, 0.12);
+  --shadow-photo-frame:
+    0 6px 16px rgba(36, 22, 16, 0.16),
+    0 2px 4px rgba(36, 22, 16, 0.12);
+
+  /* Typography Stacks */
+  --font-display: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+  --font-reading: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-handwritten: 'Caveat', 'Bradley Hand', cursive, serif;
+
+  /* Layout & Spacing */
+  --card-max-width: 390px;
+  --sheet-max-width: 540px;
+  --page-gutter: clamp(16px, 4.5vw, 28px);
+}
+
+/* --------------------------------------------------------------------------
+   Base Reset & Material Backdrop
+   -------------------------------------------------------------------------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  background-color: var(--color-deep-walnut);
+  color: var(--color-dark-ink);
+  font-family: var(--font-reading);
+  font-size: 16px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+  overflow-x: clip;
+}
+
+body {
+  min-height: 100vh;
+  min-height: 100svh;
+  background-color: var(--color-deep-walnut);
+  /* Restrained warm ambient light behind the stationery */
+  background-image: radial-gradient(
+    circle at 50% 34%,
+    rgba(117, 75, 53, 0.22) 0%,
+    rgba(59, 41, 34, 0) 70%
+  );
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-right: env(safe-area-inset-right, 0px);
+  padding-bottom: calc(48px + env(safe-area-inset-bottom, 0px));
+  padding-left: env(safe-area-inset-left, 0px);
+  overflow-x: clip;
+}
+
+/* Subtle natural paper grain utility for all ivory stationery surfaces */
+.card-interior,
+.card-cover-front,
+.card-cover-back,
+.spread-paper-sheet,
+.stationery-sheet,
+.closing-card {
+  background-color: var(--color-paper-ivory);
+  background-image:
+    radial-gradient(rgba(117, 75, 53, 0.03) 1px, transparent 0),
+    radial-gradient(rgba(56, 43, 39, 0.02) 1px, transparent 0);
+  background-size: 24px 24px;
+  background-position: 0 0, 12px 12px;
+}
+
+.experience-stage {
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+  overflow-x: clip;
+}
+
+/* --------------------------------------------------------------------------
+   Scene 1 & 2: Greeting Card Container & 3D Fold Geometry
+   -------------------------------------------------------------------------- */
+.card-scene {
+  min-height: 100vh;
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(20px, 4vh, 44px) var(--page-gutter);
+}
+
+.card-viewport {
+  width: min(86vw, var(--card-max-width));
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Parent container holding single authoritative 3D perspective */
+.greeting-card {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 0.74;
+  max-height: calc(100svh - 48px);
+  perspective: 1500px;
+  -webkit-perspective: 1500px;
+  /* Gentle initial entrance */
+  animation: cardInitialEntrance 620ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes cardInitialEntrance {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Fixed Inside Panel (Right-hand inside face of the card) */
+.card-interior {
+  position: absolute;
+  inset: 0;
+  border-radius: 3px 5px 5px 3px;
+  border: 1px solid var(--color-paper-edge);
+  box-shadow: var(--shadow-card-outer);
+  overflow: hidden;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Subtle left spine fold crease */
+.card-interior::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 14px;
+  background: linear-gradient(
+    to right,
+    rgba(36, 22, 16, 0.12) 0%,
+    rgba(227, 211, 184, 0.4) 55%,
+    transparent 100%
+  );
+  pointer-events: none;
+  z-index: 3;
+}
+
+.card-paper-frame {
+  position: relative;
+  flex: 1;
+  margin: 12px;
+  border: 1px solid var(--color-paper-edge);
+  padding: clamp(22px, 5vw, 34px) clamp(18px, 4.5vw, 28px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+/* Hinged Front Cover Assembly */
+.card-cover-hinge {
+  position: absolute;
+  inset: 0;
+  transform-origin: 0% 50%;
+  -webkit-transform-origin: 0% 50%;
+  transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d;
+  z-index: 4;
+  transition: box-shadow 0.9s ease;
+}
+
+.card-cover-front,
+.card-cover-back {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 3px 5px 5px 3px;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+/* Front Cover Interactive Button */
+.card-cover-front {
+  appearance: none;
+  -webkit-appearance: none;
+  border: 1px solid var(--color-paper-edge);
+  box-shadow: var(--shadow-card-outer);
+  cursor: pointer;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  color: var(--color-mulberry-burgundy);
+  font-family: inherit;
+  transform: rotateY(0deg) translateZ(1px);
+  -webkit-transform: rotateY(0deg) translateZ(1px);
+  transition: border-color 0.25s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Visible Left Spine Line on Closed Cover */
+.card-cover-front::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 8px;
+  background: linear-gradient(
+    to right,
+    rgba(117, 75, 53, 0.22),
+    rgba(227, 211, 184, 0.35) 60%,
+    transparent
+  );
+  pointer-events: none;
+}
+
+.card-cover-front:hover {
+  border-color: var(--color-walnut-brown);
+}
+
+.card-cover-front:focus-visible {
+  outline: 2px solid var(--color-mulberry-burgundy);
+  outline-offset: 4px;
+}
+
+.cover-paper-frame {
+  flex: 1;
+  width: 100%;
+  border: 1px solid var(--color-paper-edge);
+  padding: 5px;
+  display: flex;
+}
+
+.cover-inner-border {
+  flex: 1;
+  width: 100%;
+  border: 1px solid rgba(112, 47, 50, 0.35);
+  padding: clamp(24px, 6vw, 38px) clamp(16px, 4vw, 26px);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cover-heading-group {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-top: 6px;
+}
+
+.cover-line {
+  display: block;
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(1.875rem, 6.8vw, 2.375rem); /* 30px to 38px */
+  line-height: 1.16;
+  color: var(--color-mulberry-burgundy);
+  letter-spacing: -0.01em;
+}
+
+.cover-line--italic {
+  font-style: italic;
+  font-weight: 400;
+}
+
+.cover-illustration-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: auto 0;
+}
+
+.cover-maple-svg {
+  width: clamp(86px, 24vw, 112px);
+  height: clamp(86px, 24vw, 112px);
+  display: block;
+}
+
+.cover-prompt {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 8px 14px;
+  border-top: 1px solid var(--color-paper-edge);
+  color: var(--color-walnut-brown);
+  font-family: var(--font-reading);
+  font-size: clamp(0.75rem, 3.2vw, 0.875rem); /* 12px to 14px */
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+
+.cover-prompt-arrow {
+  color: var(--color-burnt-orange);
+  transition: transform 0.25s ease;
+}
+
+.card-cover-front:hover .cover-prompt-arrow {
+  transform: translateX(3px);
+}
+
+/* Inside Surface of the Left Cover */
+.card-cover-back {
+  border: 1px solid var(--color-paper-edge);
+  transform: rotateY(180deg);
+  -webkit-transform: rotateY(180deg);
+  padding: 12px;
+  display: flex;
+  box-shadow: var(--shadow-cover-open);
+  pointer-events: none;
+}
+
+.cover-back-paper-frame {
+  flex: 1;
+  border: 1px solid var(--color-paper-edge);
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+  padding: 18px;
+}
+
+.cover-back-ornament {
+  width: 28px;
+  height: 28px;
+  opacity: 0.65;
+}
+
+/* --------------------------------------------------------------------------
+   Scene 2: Interior Greeting Typography & Drifting Leaves
+   -------------------------------------------------------------------------- */
+.interior-content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 290px;
+}
+
+.js-enabled .interior-content {
+  opacity: 0;
+  transform: translateY(12px);
+}
+
+.interior-cluster-svg {
+  width: 132px;
+  height: 52px;
+  margin-bottom: 14px;
+}
+
+.interior-lead {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(1.2rem, 4.5vw, 1.4rem);
+  color: var(--color-walnut-brown);
+  margin-bottom: 6px;
+}
+
+.interior-title {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(2.5rem, 9vw, 3rem); /* 40px to 48px */
+  line-height: 1.08;
+  color: var(--color-mulberry-burgundy);
+  margin-bottom: 12px;
+}
+
+.interior-subtitle {
+  font-family: var(--font-reading);
+  font-weight: 400;
+  font-size: clamp(0.95rem, 3.8vw, 1.0625rem);
+  color: var(--color-dark-ink);
+}
+
+.interior-divider {
+  width: 56px;
+  height: 1px;
+  background-color: var(--color-paper-edge);
+  margin: 22px auto 18px;
+}
+
+.scroll-cue {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-reading);
+  font-size: clamp(0.75rem, 3vw, 0.8125rem);
+  font-weight: 500;
+  color: var(--color-muted-ink);
+}
+
+.scroll-cue-arrow {
+  color: var(--color-burnt-orange);
+}
+
+/* Drifting Autumn Leaves inside Card Perimeter (Never crosses main heading) */
+.falling-leaves-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.drift-leaf {
+  position: absolute;
+  top: -32px;
+  width: 22px;
+  height: 22px;
+  opacity: 0;
+}
+
+.drift-leaf--1 { left: 10%; }
+.drift-leaf--2 { right: 11%; width: 19px; height: 19px; }
+.drift-leaf--3 { left: 18%; width: 17px; height: 17px; }
+.drift-leaf--4 { right: 16%; width: 21px; height: 21px; }
+
+/* CSS Fallback if GSAP does not load */
+.greeting-card.css-fallback-open .card-cover-hinge {
+  transform: rotateY(-148deg);
+  transition: transform 1.05s cubic-bezier(0.33, 1, 0.68, 1);
+}
+
+.greeting-card.css-fallback-open .interior-content {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.55s ease 0.45s, transform 0.55s ease 0.45s;
+}
+
+/* --------------------------------------------------------------------------
+   Keepsake Flow Container (Revealed in natural document flow once opened)
+   -------------------------------------------------------------------------- */
+.keepsake-flow {
+  width: 100%;
+  max-width: var(--sheet-max-width);
+  margin: 0 auto;
+  padding: 8px var(--page-gutter) 40px;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(28px, 5vh, 44px);
+}
+
+/* When JS is active, keep below-the-fold scenes collapsed until card opens */
+.js-enabled .keepsake-flow:not(.is-unfolded) {
+  display: none;
+}
+
+.paper-spread {
+  width: 100%;
+}
+
+/* --------------------------------------------------------------------------
+   Scene 3: The Family Photographs
+   -------------------------------------------------------------------------- */
+.spread-paper-sheet {
+  border-radius: 3px;
+  border: 1px solid var(--color-paper-edge);
+  box-shadow: var(--shadow-paper-sheet);
+  padding: clamp(24px, 6vw, 40px) clamp(18px, 5vw, 34px);
+  position: relative;
+}
+
+.botanical-header {
+  display: flex;
+  justify-content: center;
+  margin-bottom: clamp(18px, 4vw, 28px);
+}
+
+.branch-svg {
+  width: 156px;
+  height: 48px;
+}
+
+.photo-album-composition {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(24px, 5.5vw, 34px);
+  align-items: center;
+}
+
+.photo-frame {
+  width: 100%;
+  margin: 0;
+}
+
+/* Deliberate, balanced asymmetry for the two vertical portraits */
+.photo-frame--primary {
+  max-width: 84%;
+  align-self: flex-start;
+  transform: rotate(-1.15deg);
+}
+
+.photo-frame--secondary {
+  max-width: 78%;
+  align-self: flex-end;
+  transform: rotate(1.35deg);
+}
+
+.js-enabled .photo-frame {
+  opacity: 0;
+}
+
+.photo-print-border {
+  background-color: var(--color-paper-ivory);
+  border: 1px solid var(--color-paper-edge);
+  box-shadow: var(--shadow-photo-frame);
+  padding: clamp(10px, 2.6vw, 14px) clamp(10px, 2.6vw, 14px) clamp(18px, 4vw, 24px);
+}
+
+.photo-inner-mat {
+  position: relative;
+  width: 100%;
+  aspect-ratio: var(--photo-aspect, 9 / 16);
+  border: 1px solid var(--color-paper-edge);
+  background-color: #EFE2C8;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.family-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  position: relative;
+  z-index: 2;
+}
+
+/* Restrained fallback if image file is not yet placed in assets/ */
+.photo-missing-fallback {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  text-align: center;
+  color: var(--color-muted-ink);
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  z-index: 1;
+}
+
+.photo-missing-fallback small {
+  font-family: var(--font-reading);
+  font-size: 0.75rem;
+  margin-top: 4px;
+  opacity: 0.8;
+}
+
+.album-caption {
+  margin-top: clamp(24px, 5vw, 32px);
+  text-align: center;
+  font-family: var(--font-reading);
+  font-size: clamp(0.8125rem, 3.3vw, 0.9375rem); /* 13px to 15px */
+  font-weight: 400;
+  color: var(--color-muted-ink);
+}
+
+/* --------------------------------------------------------------------------
+   Scene 4 & 5: The Two Heartfelt Letters
+   -------------------------------------------------------------------------- */
+.stationery-sheet {
+  position: relative;
+  border-radius: 3px;
+  border: 1px solid var(--color-paper-edge);
+  box-shadow: var(--shadow-paper-sheet);
+  padding: clamp(28px, 7vw, 46px) clamp(22px, 6vw, 42px);
+  overflow: hidden;
+}
+
+.js-enabled .stationery-sheet {
+  opacity: 0;
+  transform: translateY(14px);
+}
+
+/* Daughter's Letter Subtle Corner Botanical Detail */
+.stationery-corner-leaf {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  width: 34px;
+  height: 34px;
+  opacity: 0.85;
+}
+
+/* Boyfriend's Letter Distinct Burnt Orange Edge Detail */
+.stationery-sheet--boyfriend {
+  padding-left: clamp(26px, 6.5vw, 46px);
+}
+
+.stationery-accent-edge {
+  position: absolute;
+  top: 16px;
+  bottom: 16px;
+  left: 0;
+  width: 3px;
+  background-color: var(--color-burnt-orange);
+  border-radius: 0 2px 2px 0;
+}
+
+.letter-header {
+  margin-bottom: clamp(18px, 4.5vw, 26px);
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--color-paper-edge);
+}
+
+.letter-kicker {
+  font-family: var(--font-reading);
+  font-size: clamp(0.75rem, 3vw, 0.875rem); /* 12px to 14px */
+  font-weight: 500;
+  color: var(--color-muted-ink);
+  margin-bottom: 4px;
+}
+
+.letter-heading {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(1.5625rem, 5.8vw, 1.875rem); /* 25px to 30px */
+  line-height: 1.2;
+  color: var(--color-mulberry-burgundy);
+}
+
+.letter-body {
+  font-family: var(--font-reading);
+  font-weight: 400;
+  font-size: clamp(1rem, 4vw, 1.125rem); /* 16px to 18px */
+  line-height: 1.74;
+  color: var(--color-dark-ink);
+  max-width: 64ch;
+  text-align: left;
+}
+
+.letter-body p + p {
+  margin-top: 1.15em;
+}
+
+.letter-signoff {
+  margin-top: 26px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(227, 211, 184, 0.7);
+}
+
+.signoff-closing {
+  font-family: var(--font-reading);
+  font-size: clamp(0.95rem, 3.8vw, 1.05rem);
+  font-weight: 400;
+  color: var(--color-walnut-brown);
+}
+
+.signoff-signature {
+  font-family: var(--font-handwritten);
+  font-weight: 400;
+  font-size: clamp(1.25rem, 4.8vw, 1.4375rem); /* 20px to 23px */
+  color: var(--color-mulberry-burgundy);
+  margin-top: 4px;
+  line-height: 1.3;
+}
+
+/* --------------------------------------------------------------------------
+   Scene 6: Final Birthday Wish
+   -------------------------------------------------------------------------- */
+.closing-card {
+  border-radius: 3px;
+  border: 1px solid var(--color-paper-edge);
+  box-shadow: var(--shadow-paper-sheet);
+  padding: clamp(32px, 7.5vw, 48px) clamp(22px, 6vw, 38px);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.js-enabled .closing-card {
+  opacity: 0;
+  transform: translateY(14px);
+}
+
+.closing-leaf-svg {
+  width: 32px;
+  height: 32px;
+  margin-bottom: 12px;
+}
+
+.closing-lead {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(1.15rem, 4.2vw, 1.35rem);
+  color: var(--color-walnut-brown);
+  margin-bottom: 4px;
+}
+
+.closing-title {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(1.75rem, 6.2vw, 2.25rem); /* 28px to 36px */
+  line-height: 1.15;
+  color: var(--color-mulberry-burgundy);
+}
+
+.closing-burgundy-line {
+  width: 72px;
+  height: 1px;
+  background-color: var(--color-mulberry-burgundy);
+  margin: 16px auto;
+}
+
+.closing-wish {
+  font-family: var(--font-reading);
+  font-weight: 400;
+  font-size: clamp(0.95rem, 3.8vw, 1.0625rem);
+  color: var(--color-dark-ink);
+  max-width: 36ch;
+}
+
+/* --------------------------------------------------------------------------
+   Responsive Refinements (Tablet & Desktop)
+   -------------------------------------------------------------------------- */
+@media (min-width: 768px) {
+  .card-viewport {
+    transition: transform 1.05s cubic-bezier(0.33, 1, 0.68, 1);
+  }
+
+  /* On wider viewports, subtly shift the open spread so both panels sit balanced */
+  .card-viewport.is-open-spread {
+    transform: translateX(28%);
+  }
+
+  .photo-frame--primary {
+    max-width: 72%;
+  }
+
+  .photo-frame--secondary {
+    max-width: 68%;
+  }
+}
+
+@media (max-height: 660px) and (max-width: 480px) {
+  /* Short mobile viewport protection so the closed card never crops */
+  .greeting-card {
+    width: min(80vw, 330px);
+  }
+  .cover-maple-svg {
+    width: 74px;
+    height: 74px;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Reduced Motion Accessibility (@media prefers-reduced-motion)
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .falling-leaves-layer {
+    display: none !important;
+  }
+
+  .js-enabled .interior-content,
+  .js-enabled .photo-frame,
+  .js-enabled .stationery-sheet,
+  .js-enabled .closing-card {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
